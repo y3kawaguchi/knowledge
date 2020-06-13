@@ -1,2 +1,2 @@
 # knowledge
-knowledge投稿するネタ用
+knowledge投稿するネタ作り用
