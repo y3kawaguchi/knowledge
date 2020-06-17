@@ -3,7 +3,7 @@ package handler
 import (
 	"net/http"
 
-	"restAPI/article"
+	"github.com/y3kawaguchi/knowledge/article"
 
 	"github.com/gin-gonic/gin"
 )
