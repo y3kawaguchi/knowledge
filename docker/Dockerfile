@@ -1,4 +1,4 @@
-FROM golang:1.13
+FROM golang:1.14
 
 # コンテナ内に作業ディレクトリを作成
 RUN mkdir /knowledge
@@ -7,8 +7,8 @@ WORKDIR /knowledge
 # ソースをコピー
 COPY . /knowledge
 # ポートを公開
-EXPOSE 80
+EXPOSE 8080
 # ビルド
-RUN go build -o build/knowledge -v ./cmd/knowledge/
+RUN GO111MODULE=on GOOS=linux GOARCH=amd64 go build -o build/knowledge -v ./cmd/knowledge
 # Serverを起動
 CMD ./build/knowledge
