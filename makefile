@@ -1,17 +1,29 @@
-build:
-	go build -o build/knowledge -v ./cmd/knowledge/
+build: format
+	docker-compose build --no-cache
 
-build_linux:
-	GOOS=linux GOARCH=amd64 go build -o build/knowledge -v ./cmd/knowledge
+build_linux: format
+	GO111MODULE=on GOOS=linux GOARCH=amd64 go build -o build/knowledge -v ./cmd/knowledge
+
+down:
+	docker-compose down
 
 format:
 	go fmt ./...
 
-run:
-	build/knowledge
+start:
+	docker-compose start
+
+stop:
+	docker-compose stop
+
+up:
+	docker-compose up -d
 
 .PHONY: \
 	build \
 	build_linux \
+	down \
 	format \
-	run
+	start \
+	stop \
+	up

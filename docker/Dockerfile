@@ -4,11 +4,11 @@ FROM golang:1.14
 RUN mkdir /knowledge
 # コンテナログイン時のディレクトリ指定
 WORKDIR /knowledge
-# ソースをコピー
+# コンテナにソースをコピー
 COPY . /knowledge
 # ポートを公開
 EXPOSE 8080
-# ビルド
-RUN GO111MODULE=on GOOS=linux GOARCH=amd64 go build -o build/knowledge -v ./cmd/knowledge
+# コンテナにコピーしたソースをビルド
+RUN make build_linux
 # Serverを起動
 CMD ./build/knowledge
