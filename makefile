@@ -17,7 +17,8 @@ stop:
 	docker-compose stop
 
 up:
-	docker-compose up -d
+	docker-compose up -d db
+	docker-compose up -d app
 
 .PHONY: \
 	build \
