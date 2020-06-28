@@ -1,7 +1,7 @@
-package article
+package domain
 
-// Item ...
-type Item struct {
+// Article ...
+type Article struct {
 	AuthorID int64
 	Title    string
 	Content  string
@@ -9,20 +9,20 @@ type Item struct {
 
 // Articles ...
 type Articles struct {
-	Items []Item
+	Items []Article
 }
 
-// New ...
-func New() *Articles {
+// ArticlesNew ...
+func ArticlesNew() *Articles {
 	return &Articles{}
 }
 
 // Add ...
-func (r *Articles) Add(item Item) {
+func (r *Articles) Add(item Article) {
 	r.Items = append(r.Items, item)
 }
 
 // GetAll ...
-func (r *Articles) GetAll() []Item {
+func (r *Articles) GetAll() []Article {
 	return r.Items
 }

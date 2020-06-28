@@ -1,14 +1,14 @@
 package main
 
 import (
-	"github.com/y3kawaguchi/knowledge/internal/domain/article"
+	"github.com/y3kawaguchi/knowledge/internal/domain"
 	"github.com/y3kawaguchi/knowledge/internal/handlers"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	article := article.New()
+	article := domain.ArticlesNew()
 	r := gin.Default()
 	r.GET("/article", handlers.ArticlesGet(article))
 	r.POST("/article", handlers.ArticlePost(article))
