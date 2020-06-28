@@ -1,4 +1,4 @@
-FROM golang:1.14
+FROM golang:1.14-stretch
 
 # コンテナ内に作業ディレクトリを作成
 RUN mkdir /knowledge
