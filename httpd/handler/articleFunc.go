@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// ArticlesGet ...
 func ArticlesGet(articles *article.Articles) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		result := articles.GetAll()
@@ -15,19 +16,22 @@ func ArticlesGet(articles *article.Articles) gin.HandlerFunc {
 	}
 }
 
-type ArticlePostRequest struct {
-	Title       string `json:"title"`
-	Description string `json:"description"`
+type articlePostRequest struct {
+	AuthorID int64  `json:"author_id" binding:"required"`
+	Title    string `json:"title" binding:"required"`
+	Content  string `json:"content" binding:"required"`
 }
 
+// ArticlePost ...
 func ArticlePost(post *article.Articles) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		requestBody := ArticlePostRequest{}
+		requestBody := articlePostRequest{}
 		c.Bind(&requestBody)
 
 		item := article.Item{
-			Title:       requestBody.Title,
-			Description: requestBody.Description,
+			AuthorID: requestBody.AuthorID,
+			Title:    requestBody.Title,
+			Content:  requestBody.Content,
 		}
 		post.Add(item)
 
