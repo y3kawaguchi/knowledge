@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/y3kawaguchi/knowledge/article"
+	"github.com/y3kawaguchi/knowledge/internal/domain/article"
 	"github.com/y3kawaguchi/knowledge/internal/handlers"
 
 	"github.com/gin-gonic/gin"

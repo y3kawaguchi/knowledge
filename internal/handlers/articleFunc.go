@@ -3,7 +3,7 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/y3kawaguchi/knowledge/article"
+	"github.com/y3kawaguchi/knowledge/internal/domain/article"
 
 	"github.com/gin-gonic/gin"
 )
