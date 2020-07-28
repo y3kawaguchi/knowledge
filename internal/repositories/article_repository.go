@@ -1,6 +1,8 @@
 package repositories
 
 import (
+	"time"
+
 	"github.com/y3kawaguchi/knowledge/internal/db"
 	"github.com/y3kawaguchi/knowledge/internal/domains"
 )
@@ -44,4 +46,35 @@ func (a *ArticleRepository) FindAll() (*domains.Articles, error) {
 	}
 
 	return articles, nil
+}
+
+// Save ...
+func (a *ArticleRepository) Save(article *domains.Article) (int64, error) {
+	now := time.Now()
+
+	_, err := a.connection.GetDB().Exec(`INSERT INTO articles
+		(
+			author_id,
+			title,
+			content,
+			created_at,
+			updated_at
+		) VALUES (
+			$1,
+			$2,
+			$3,
+			$4,
+			$5
+		)`,
+		article.AuthorID,
+		article.Title,
+		article.Content,
+		now,
+		now,
+	)
+	if err != nil {
+		return -1, err
+	}
+
+	return 0, err
 }

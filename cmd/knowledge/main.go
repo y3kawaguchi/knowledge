@@ -33,8 +33,9 @@ func main() {
 
 	r := gin.Default()
 	// r.GET("/article", handlers.ArticlesGet(articles))
-	r.GET("/article", articleAPI.ArticlesGet())
+	// r.GET("/article", articleAPI.ArticlesGet())
 	//	r.POST("/article", handlers.ArticlePost(articles))
+	r.POST("/article", articleAPI.ArticlePost())
 
 	// listen and serve on 0.0.0.0:8080
 	r.Run()

@@ -18,6 +18,11 @@ func NewArticleUsecase(repository *repositories.ArticleRepository) *ArticleUseca
 	return usecase
 }
 
+// Create ...
+func (a *ArticleUsecase) Create(article *domains.Article) (int64, error) {
+	return a.repository.Save(article)
+}
+
 // Get ...
 func (a *ArticleUsecase) Get() (*domains.Articles, error) {
 	articles, err := a.repository.FindAll()
