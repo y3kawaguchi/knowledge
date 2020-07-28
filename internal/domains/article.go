@@ -1,10 +1,15 @@
-package domain
+package domains
+
+import "time"
 
 // Article ...
 type Article struct {
-	AuthorID int64
-	Title    string
-	Content  string
+	ID        int64
+	AuthorID  int64
+	Title     string
+	Content   string
+	CreatedAt time.Time
+	UpdatedAt time.Time
 }
 
 // Articles ...

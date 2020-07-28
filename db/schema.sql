@@ -15,6 +15,8 @@ CREATE SEQUENCE articles_id_seq
   NO MAXVALUE
   CACHE 1;
 
+ALTER TABLE ONLY articles ALTER COLUMN id SET DEFAULT nextval('articles_id_seq'::regclass);
+
 
 
 CREATE TABLE IF NOT EXISTS users (
@@ -33,3 +35,5 @@ CREATE SEQUENCE users_id_seq
   NO MINVALUE
   NO MAXVALUE
   CACHE 1;
+
+  ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
