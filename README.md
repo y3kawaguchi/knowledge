@@ -1,5 +1,5 @@
 # knowledge
-knowledge投稿するネタ作り用
+for posting on knowledge
 
 ## Prerequirement
 - Go 1.14

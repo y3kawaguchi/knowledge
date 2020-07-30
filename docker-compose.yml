@@ -6,6 +6,13 @@ services:
       dockerfile: docker/Dockerfile
     depends_on:
       - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: root
+      DB_PASS: password
+      DB_NAME: knowledge
+      DB_SSL_MODE: disable
     ports: 
       - "8080:8080"
     tty: true # コンテナの起動永続化

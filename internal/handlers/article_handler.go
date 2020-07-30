@@ -11,9 +11,8 @@ import (
 
 // Article ...
 type Article interface {
-	//Create(c context.Context, article *domains.Article)
 	Create(article *domains.Article) (int64, error)
-	//Get() (*domains.Articles, error)
+	// Get() (*domains.Articles, error)
 }
 
 // ArticleAPI ...
@@ -27,23 +26,6 @@ func NewArticleAPI(article Article) *ArticleAPI {
 		article: article,
 	}
 }
-
-// // CreateArticle ...
-// func (a *ArticleAPI) CreateArticle(c *gin.Context) gin.HandlerFunc {
-// 	return func(c *gin.Context) {
-// 		requestBody := articlePostRequest{}
-// 		c.Bind(&requestBody)
-
-// 		item := domains.Article{
-// 			AuthorID: requestBody.AuthorID,
-// 			Title:    requestBody.Title,
-// 			Content:  requestBody.Content,
-// 		}
-// 		post.Add(item)
-
-// 		c.Status(http.StatusNoContent)
-// 	}
-// }
 
 // ArticlesGet ...
 // func (a ArticleAPI) ArticlesGet() gin.HandlerFunc {
@@ -79,15 +61,13 @@ func (a ArticleAPI) ArticlePost() gin.HandlerFunc {
 			Content:  requestBody.Content,
 		}
 
-		id, err := a.article.Create(item)
+		_, err := a.article.Create(item)
 
 		if err != nil {
 			fmt.Printf("error: %#v\n", err)
+			c.Error(err).SetMeta(http.StatusInternalServerError)
+		} else {
+			c.Status(http.StatusNoContent)
 		}
-
-		// TODO: plan to remove
-		_ = id
-
-		c.Status(http.StatusNoContent)
 	}
 }
