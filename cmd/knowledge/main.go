@@ -10,9 +10,6 @@ import (
 )
 
 func main() {
-	// TODO: plan to remove
-	//articles := domains.ArticlesNew()
-
 	// PostgreSQL setup
 	dbConfig, err := db.GetPostgreSQLConfigFromEnv()
 	if err != nil {
@@ -29,43 +26,13 @@ func main() {
 	// inject articleRepository to usecase
 	articleUsecase := usecases.NewArticleUsecase(articleRepository)
 
+	// inject articleUsecase to handler
 	articleAPI := handlers.NewArticleAPI(articleUsecase)
 
 	r := gin.Default()
-	// r.GET("/article", handlers.ArticlesGet(articles))
-	// r.GET("/article", articleAPI.ArticlesGet())
-	//	r.POST("/article", handlers.ArticlePost(articles))
+	r.GET("/article", articleAPI.ArticlesGet())
 	r.POST("/article", articleAPI.ArticlePost())
 
 	// listen and serve on 0.0.0.0:8080
 	r.Run()
 }
-
-// func main() {
-// 	// TODO: plan to remove
-// 	article := domains.ArticlesNew()
-
-// 	container := dig.New()
-
-// 	// PostgreSQL setup
-// 	dbConfig, err := database.GetPostgreSQLConfigFromEnv()
-// 	if err != nil {
-// 		// TODO: plan to implement logging
-// 	}
-// 	dbConnection, err := database.ConnectPostgreSQL(dbConfig)
-// 	if err != nil {
-// 		// TODO: plan to implement logging
-// 	}
-// 	// container.Invoke()した時に実行して欲しいfunc(dbConnection.GetDB)を登録
-// 	err = container.Provide(dbConnection.GetDB)
-// 	if err != nil {
-// 		// TODO: plan to implement logging
-// 	}
-
-// 	r := gin.Default()
-// 	r.GET("/article", handlers.ArticlesGet(article))
-// 	r.POST("/article", handlers.ArticlePost(article))
-
-// 	// listen and serve on 0.0.0.0:8080
-// 	r.Run()
-// }

@@ -12,7 +12,7 @@ import (
 // Article ...
 type Article interface {
 	Create(article *domains.Article) (int64, error)
-	// Get() (*domains.Articles, error)
+	Get() (*domains.Articles, error)
 }
 
 // ArticleAPI ...
@@ -28,20 +28,16 @@ func NewArticleAPI(article Article) *ArticleAPI {
 }
 
 // ArticlesGet ...
-// func (a ArticleAPI) ArticlesGet() gin.HandlerFunc {
-// 	// func ArticlesGet(articles *domains.Articles) gin.HandlerFunc {
-// 	return func(c *gin.Context) {
-// 		// result := articles.GetAll()
-
-// 		// TODO: 変数化する
-// 		result, err := a.article.Get()
-// 		if err != nil {
-// 			c.Error(err).SetMeta(http.StatusInternalServerError)
-// 			return
-// 		}
-// 		c.JSON(http.StatusOK, result)
-// 	}
-// }
+func (a ArticleAPI) ArticlesGet() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		result, err := a.article.Get()
+		if err != nil {
+			c.Error(err).SetMeta(http.StatusInternalServerError)
+			return
+		}
+		c.JSON(http.StatusOK, result)
+	}
+}
 
 type articlePostRequest struct {
 	AuthorID int64  `json:"author_id" binding:"required"`
