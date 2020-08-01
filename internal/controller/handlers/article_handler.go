@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/y3kawaguchi/knowledge/internal/controller/form"
 	"github.com/y3kawaguchi/knowledge/internal/domains"
 
 	"github.com/gin-gonic/gin"
@@ -48,16 +49,24 @@ type articlePostRequest struct {
 // ArticlePost ...
 func (a ArticleAPI) ArticlePost() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		requestBody := articlePostRequest{}
-		c.Bind(&requestBody)
-
-		item := &domains.Article{
-			AuthorID: requestBody.AuthorID,
-			Title:    requestBody.Title,
-			Content:  requestBody.Content,
+		var f form.Article
+		if err := c.ShouldBindJSON(&f); err != nil {
+			c.Error(err).SetMeta(http.StatusUnprocessableEntity)
+			return
 		}
+		article := f.BuildDomain()
 
-		_, err := a.article.Create(item)
+		// requestBody := articlePostRequest{}
+		// c.Bind(&requestBody)
+
+		// item := &domains.Article{
+		// 	AuthorID: requestBody.AuthorID,
+		// 	Title:    requestBody.Title,
+		// 	Content:  requestBody.Content,
+		// }
+
+		//		_, err := a.article.Create(item)
+		_, err := a.article.Create(article)
 
 		if err != nil {
 			fmt.Printf("error: %#v\n", err)

@@ -1,8 +1,8 @@
 package main
 
 import (
+	"github.com/y3kawaguchi/knowledge/internal/controller/handlers"
 	"github.com/y3kawaguchi/knowledge/internal/db"
-	"github.com/y3kawaguchi/knowledge/internal/handlers"
 	"github.com/y3kawaguchi/knowledge/internal/repositories"
 	"github.com/y3kawaguchi/knowledge/internal/usecases"
 
