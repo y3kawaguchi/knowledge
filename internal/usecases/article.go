@@ -1,6 +1,8 @@
 package usecases
 
 import (
+	"fmt"
+
 	"github.com/y3kawaguchi/knowledge/internal/domains"
 	"github.com/y3kawaguchi/knowledge/internal/repositories"
 )
@@ -26,8 +28,6 @@ func (a *ArticleUsecase) Create(article *domains.Article) (int64, error) {
 // Get ...
 func (a *ArticleUsecase) Get() (*domains.Articles, error) {
 	articles, err := a.repository.FindAll()
-	if err != nil {
-		return nil, err
-	}
-	return articles, nil
+	fmt.Printf("ArticleUsecase.Get(): %#v\n", articles)
+	return articles, err
 }

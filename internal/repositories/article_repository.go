@@ -1,6 +1,7 @@
 package repositories
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/y3kawaguchi/knowledge/internal/db"
@@ -31,10 +32,12 @@ func (a *ArticleRepository) FindAll() (*domains.Articles, error) {
 	}
 	defer rows.Close()
 
+	fmt.Printf("rows: %#v\n", rows)
+
 	articles := domains.ArticlesNew()
 	for rows.Next() {
 		item := domains.Article{}
-		rows.Scan(
+		err := rows.Scan(
 			&item.ID,
 			&item.AuthorID,
 			&item.Title,
@@ -42,8 +45,14 @@ func (a *ArticleRepository) FindAll() (*domains.Articles, error) {
 			&item.CreatedAt,
 			&item.UpdatedAt,
 		)
+		if err != nil {
+			// TODO: nilを返すのが適切か考える
+			return nil, err
+		}
 		articles.Add(item)
 	}
+
+	fmt.Printf("ArticleRepository.FindAll(): %#v\n", articles)
 
 	return articles, nil
 }
