@@ -16,6 +16,9 @@ start:
 stop:
 	docker-compose stop
 
+test:
+	go test -v ./...
+
 up:
 	docker-compose up -d app
 
@@ -26,4 +29,5 @@ up:
 	format \
 	start \
 	stop \
+	test \
 	up
