@@ -17,6 +17,11 @@ for posting on knowledge
 make build
 ```
 
+### Test
+```bash
+make test
+```
+
 ### Run
 ```bash
 make up
