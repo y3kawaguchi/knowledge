@@ -36,7 +36,7 @@ func TestArticle(t *testing.T) {
 	for k, tc := range cases {
 		t.Run(k, func(t *testing.T) {
 			gc, _ := gin.CreateTestContext(httptest.NewRecorder())
-			gc.Request, _ = http.NewRequest("POST", "/article", bytes.NewBuffer(tc.body))
+			gc.Request, _ = http.NewRequest("POST", "/articles", bytes.NewBuffer(tc.body))
 			article := Article{}
 			err := gc.ShouldBindJSON(&article)
 			if err == nil {

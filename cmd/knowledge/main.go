@@ -30,8 +30,8 @@ func main() {
 	articleAPI := handlers.NewArticleAPI(articleUsecase)
 
 	r := gin.Default()
-	r.GET("/article", articleAPI.ArticlesGet())
-	r.POST("/article", articleAPI.ArticlePost())
+	r.GET("/articles", articleAPI.ArticlesGet())
+	r.POST("/articles", articleAPI.ArticlePost())
 
 	// listen and serve on 0.0.0.0:8080
 	r.Run()
