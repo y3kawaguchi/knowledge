@@ -23,11 +23,23 @@ func ArticlesNew() *Articles {
 }
 
 // Add ...
-func (r *Articles) Add(item Article) {
-	r.Items = append(r.Items, item)
+func (a *Articles) Add(item Article) {
+	a.Items = append(a.Items, item)
 }
 
 // GetAll ...
-func (r *Articles) GetAll() []Article {
-	return r.Items
+func (a *Articles) GetAll() []Article {
+	return a.Items
+}
+
+// Change ...
+func (a *Article) Change(item Article) *Article {
+	return &Article{
+		ID:        a.ID,
+		AuthorID:  item.AuthorID,
+		Title:     item.Title,
+		Content:   item.Content,
+		CreatedAt: a.CreatedAt,
+		UpdatedAt: a.UpdatedAt,
+	}
 }

@@ -31,3 +31,13 @@ func (a *ArticleUsecase) Get() (*domains.Articles, error) {
 	fmt.Printf("ArticleUsecase.Get(): %#v\n", articles)
 	return articles, err
 }
+
+// Update ...
+func (a *ArticleUsecase) Update(article *domains.Article) (int64, error) {
+	target, err := a.repository.FindByID(article.ID)
+	if err != nil {
+		return -1, err
+	}
+	changed := target.Change(*article)
+	return a.repository.Update(changed)
+}

@@ -19,6 +19,7 @@ func main() {
 	if err != nil {
 		// TODO: plan to implement logging
 	}
+	defer dbConnection.Close()
 
 	// inject dbConnection to repository
 	articleRepository := repositories.NewArticleRepository(dbConnection)
@@ -32,6 +33,7 @@ func main() {
 	r := gin.Default()
 	r.GET("/articles", articleAPI.ArticlesGet())
 	r.POST("/articles", articleAPI.ArticlePost())
+	r.PUT("/articles/:articles_id", articleAPI.ArticlePut())
 
 	// listen and serve on 0.0.0.0:8080
 	r.Run()
