@@ -56,7 +56,7 @@ func TestMain(m *testing.M) {
 		log.Fatal(err)
 	}
 	if err := godotenv.Load(envPath); err != nil {
-		log.Fatal("Error loading .env file")
+		log.Fatal(err, "Error loading .env file")
 	}
 
 	// PostgreSQL setup
