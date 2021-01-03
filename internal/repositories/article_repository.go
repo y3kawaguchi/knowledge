@@ -6,6 +6,7 @@ import (
 
 	"github.com/y3kawaguchi/knowledge/internal/db"
 	"github.com/y3kawaguchi/knowledge/internal/domains"
+	"github.com/y3kawaguchi/knowledge/pkg/location"
 )
 
 // ArticleRepository ...
@@ -61,8 +62,8 @@ func (a *ArticleRepository) FindAll() (*domains.Articles, error) {
 func (a *ArticleRepository) FindByID(id int64) (*domains.Article, error) {
 	db := a.connection.GetDB()
 
-	fmt.Printf("db: %#v\n", db)
-	fmt.Printf("id: %#v\n", id)
+	// fmt.Printf("db: %#v\n", db)
+	// fmt.Printf("id: %#v\n", id)
 
 	query := `SELECT * FROM articles where id = $1`
 
@@ -80,7 +81,10 @@ func (a *ArticleRepository) FindByID(id int64) (*domains.Article, error) {
 		return nil, err
 	}
 
-	fmt.Printf("ArticleRepository.FindByID(): %#v\n", item)
+	// fmt.Printf("ArticleRepository.FindByID(): %#v\n", item)
+
+	item.CreatedAt = item.CreatedAt.In(location.JP())
+	item.UpdatedAt = item.UpdatedAt.In(location.JP())
 
 	return &item, nil
 }

@@ -3,8 +3,8 @@ CREATE TABLE IF NOT EXISTS articles (
   author_id bigint NOT NULL,
   title character varying NOT NULL,
   content text NOT NULL,
-  created_at timestamp without time zone NOT NULL,
-  updated_at timestamp without time zone NOT NULL,
+  created_at timestamp with time zone NOT NULL,
+  updated_at timestamp with time zone NOT NULL,
   PRIMARY KEY (id)
 );
 
@@ -23,9 +23,9 @@ CREATE TABLE IF NOT EXISTS users (
   id bigint NOT NULL,
   username character varying NOT NULL,
   email character varying NOT NULL,
-  created_at timestamp without time zone NOT NULL,
-  updated_at timestamp without time zone NOT NULL,
-  deleted_at timestamp without time zone,
+  created_at timestamp with time zone NOT NULL,
+  updated_at timestamp with time zone NOT NULL,
+  deleted_at timestamp with time zone,
   PRIMARY KEY (id)
 );
 

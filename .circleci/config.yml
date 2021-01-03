@@ -1,38 +1,14 @@
-version: 2
-jobs:
+version: 2.1
+jobs:  
   build:
-    docker:
-      - image: circleci/golang:1.14
-    working_directory: /go/src/github.com/y3kawaguchi/knowledge
-    steps:
-      - checkout
-      - run: make build_linux
-  
-  test:
     machine: true # docker-composeはDockerイメージ内では使えないためLinux仮想マシンイメージを指定
     steps:
+      - checkout
       - run:
-        name: setup docker-compose
-        command: |
-          docker-compose -f ./docker-compose.ci.yml up -d
+          name: setup docker-compose
+          command: |
+            docker-compose -f ./docker-compose.ci.yml up -d
       - run:
-        name: run test on docker-compose
-        command: |
-          docker-compose -f ./docker-compose.ci.yml exec app make test
-
-workfolws:
-  version: 2
-  build_and_test:
-    jobs:
-      - build:
-        context: org-global
-        filters:
-          tags:
-            only: /.*/
-      - test:
-        context: org-global
-        requires:
-          - build
-        filters:
-          tags:
-            only: /.*/
+          name: run test on docker-compose
+          command: |
+            docker-compose -f ./docker-compose.ci.yml exec app make test
